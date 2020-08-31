@@ -8,6 +8,12 @@ import {
   CLEAR_ERROR_FAILURE,
   CLEAR_ERROR_REQUEST,
   CLEAR_ERROR_SUCCESS,
+  USER_LOADING_REQUEST,
+  USER_LOADING_SUCCESS,
+  USER_LOADING_FAILURE,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
 } from "../types";
 
 const initialState = {
@@ -24,6 +30,7 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case REGISTER_REQUEST:
     case LOGOUT_REQUEST:
     case LOGIN_REQUEST:
       return {
@@ -31,6 +38,7 @@ const authReducer = (state = initialState, action) => {
         errorMsg: "",
         isLoading: true,
       };
+    case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       return {
@@ -42,6 +50,7 @@ const authReducer = (state = initialState, action) => {
         userRole: action.payload.user.role,
         errorMsg: "",
       };
+    case REGISTER_FAILURE:
     case LOGOUT_FAILURE:
     case LOGIN_FAILURE:
       localStorage.removeItem("token");
@@ -81,6 +90,29 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMsg: null,
+      };
+    case USER_LOADING_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case USER_LOADING_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        isLoading: false,
+        user: action.payload,
+        userId: action.payload._id,
+        userName: action.payload.name,
+        userRole: action.payload.role,
+      };
+    case USER_LOADING_FAILURE:
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        userRole: "",
       };
     default:
       return state;
