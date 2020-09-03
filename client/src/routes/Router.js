@@ -13,7 +13,7 @@ import { EditProtectedRoute } from "./protectedRoute/ProtectedRoute";
 import PostEdit from "./normalRoute/PostEdit";
 
 const MyRouter = () => (
-  <>
+  <Fragment>
     <AppNavbar />
     <Header />
     <Container id="main-body">
@@ -32,7 +32,7 @@ const MyRouter = () => (
       </Switch>
     </Container>
     <Footer />
-  </>
+  </Fragment>
 );
 
 export default MyRouter;

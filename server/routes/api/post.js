@@ -53,8 +53,10 @@ router.post("/image", uploadS3.array("upload", 5), async (req, res, next) => {
 // api/post
 router.get("/", async (req, res) => {
   const postFindResult = await Post.find(); // awiat를 사용하여 Post 모델에서 모든 데이터를 찾을 때까지 아래줄로 내려가지 않음.
-  console.log(postFindResult, "All Post Get");
-  res.json(postFindResult);
+  const categoryFindResult = await Category.find();
+  const result = { postFindResult, categoryFindResult };
+
+  res.json(result);
 });
 
 // @route     POST api/post
@@ -90,17 +92,21 @@ router.post("/", auth, uploadS3.none(), async (req, res, next) => {
         $push: { posts: newPost._id },
       });
       await User.findByIdAndUpdate(req.user.id, {
-        $push: { posts: newPost._id },
+        $push: {
+          posts: newPost._id,
+        },
       });
     } else {
       await Category.findByIdAndUpdate(findResult._id, {
         $push: { posts: newPost._id },
       });
-      await Post.findOneAndUpdate(newPost._id, {
-        $push: { category: findResult._id },
+      await Post.findByIdAndUpdate(newPost._id, {
+        category: findResult._id,
       });
       await User.findByIdAndUpdate(req.user.id, {
-        $push: { posts: newPost._id },
+        $push: {
+          posts: newPost._id,
+        },
       });
     }
     return res.redirect(`/api/post/${newPost._id}`);
@@ -233,6 +239,25 @@ router.post("/:id/edit", auth, async (req, res, next) => {
     );
     console.log(modified_post, "edit modified");
     res.redirect(`/api/post/${modified_post.id}`);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+});
+
+router.get("/category/:categoryName", async (req, res, next) => {
+  try {
+    const result = await Category.findOne(
+      {
+        categoryName: {
+          $regex: req.params.categoryName,
+          $options: "i",
+        },
+      },
+      "posts"
+    ).populate({ path: "posts" });
+    console.log(result, "Category Find result");
+    res.send(result);
   } catch (e) {
     console.log(e);
     next(e);
