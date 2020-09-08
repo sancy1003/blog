@@ -14,8 +14,9 @@ const Category = ({ posts }) => {
                 className="text-dark text-decoration-none"
               >
                 <span className="ml-1">
-                  <Button color="info">
-                    {categoryName} <Badge color="light">{posts.length}</Badge>
+                  <Button className="btn-category-item">
+                    {categoryName}{" "}
+                    <Badge className="badge">{posts.length}</Badge>
                   </Button>
                 </span>
               </Link>

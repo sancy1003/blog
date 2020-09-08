@@ -49,9 +49,11 @@ const Comments = ({ id, userName, userId }) => {
   return (
     <Fragment>
       <Form onSubmit={onSubmit}>
-        <FormGroup>
+        <FormGroup className="mb-o">
           <Row className="p-2">
-            <div className="font-weight-bold m-1">Make Comment</div>
+            <div className="font-weight-bold mx-1 mt-1 mb-2 comment-title">
+              Make Comment
+            </div>
             <div className="my-1" />
             <Input
               innerRef={resetValue}
@@ -62,9 +64,8 @@ const Comments = ({ id, userName, userId }) => {
               placeholder="Comment"
             />
             <Button
-              color="primary"
               block
-              className="mt-2 offset-md-10 col-md-2"
+              className="mt-3 offset-md-10 col-md-2 btn-comment-submit"
             >
               Submit
             </Button>

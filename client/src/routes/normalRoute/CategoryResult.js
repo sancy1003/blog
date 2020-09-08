@@ -22,7 +22,7 @@ const CategoryResult = () => {
 
   return (
     <div>
-      <h1>Category: "{categoryName}"</h1>
+      <div className="serch-result-title">[ {categoryName} ]</div>
       <Row>
         <PostCardOne posts={categoryFindResult.posts}></PostCardOne>
       </Row>

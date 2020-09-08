@@ -67,13 +67,13 @@ const Profile = () => {
       <Helmet title={`profile | ${userName}님의 프로필`} />
       <Col sm="12" md={{ size: 6, offset: 3 }}>
         <Card>
-          <CardHeader>
+          <CardHeader className="profile-edit-title">
             <strong>Edit Password</strong>
           </CardHeader>
           <CardBody>
             <Form onSubmit={onSubmit}>
               <FormGroup>
-                <Label for="title">기존 비밀번호</Label>
+                <Label for="title">Current Password</Label>
                 <Input
                   type="password"
                   name="previousPassword"
@@ -88,7 +88,7 @@ const Profile = () => {
                 )}
               </FormGroup>
               <FormGroup>
-                <Label for="title">새 비밀번호</Label>
+                <Label for="title">New password</Label>
                 <Input
                   type="password"
                   name="password"
@@ -98,7 +98,7 @@ const Profile = () => {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="title">비밀번호 확인</Label>
+                <Label for="title">Confirm password</Label>
                 <Input
                   type="password"
                   name="rePassword"
@@ -108,12 +108,8 @@ const Profile = () => {
                 />
                 {errorMsg ? <Alert color="danger">{errorMsg}</Alert> : ""}
               </FormGroup>
-              <Button
-                color="success"
-                block
-                className="mt-4 mb-4 col-md-3 offset-9"
-              >
-                제출하기
+              <Button block className="mt-4 mb-2 col-md-3 offset-9 btn-profile">
+                Submit
               </Button>
               {successMsg ? <Alert color="success">{successMsg}</Alert> : ""}
             </Form>

@@ -13,11 +13,11 @@ import LoginModal from "../components/auth/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT_REQUEST } from "../redux/types";
 import RegisterModal from "./auth/RegisterModal";
-import SearchInput from "./search/searchInput";
 
 const AppNavbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // 모바일 상단 바 상태
   const { isAuthenticated, user, userRole } = useSelector(
+    // auth 리듀서에서 유저 정보, 인증 여부를 받아옴
     (state) => state.auth
   );
   console.log(userRole, "UserRole");
@@ -30,6 +30,8 @@ const AppNavbar = () => {
     });
   }, [dispatch]);
 
+  // componentDidMount와 같은 기능, 배열을 빈배열로 두면 어떠한 변화가 생겨도 리렌더링 하지 않는다는 의미
+  // 배열에 값을 넣으면 그 값이 변할 때만 리렌더링 하겠다는 의미
   useEffect(() => {
     setIsOpen(false);
   }, [user]);
@@ -48,7 +50,7 @@ const AppNavbar = () => {
           <Form className="col">
             <Link
               to="post"
-              className="btn btn-success block text-white px-3"
+              className="btn block text-white px-3 btn-add"
               onClick={addPostClick}
             >
               Add Post
@@ -62,12 +64,12 @@ const AppNavbar = () => {
         <Form className="col">
           {user && user.name ? (
             <Link to={`/user/${user.name}/profile`}>
-              <Button outline color="light" className="px-3" block>
+              <Button outline color="light" className="px-3 myNav-menu-btn">
                 <strong>{user ? `Welcome ${user.name}` : ""}</strong>
               </Button>
             </Link>
           ) : (
-            <Button outline color="light" className="px-3" block>
+            <Button outline color="light" className="px-3">
               <strong>No User</strong>
             </Button>
           )}
@@ -76,7 +78,7 @@ const AppNavbar = () => {
       <NavItem>
         <Form className="col">
           <Link onClick={onLogout} to="#">
-            <Button outline color="light" className="" block>
+            <Button outline color="light" className="myNav-menu-btn">
               Logout
             </Button>
           </Link>
@@ -98,13 +100,12 @@ const AppNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar color="dark" dark expand="lg" className="sticky-top">
-        <Link to="/" className="text-white text-decoration-none">
+      <Navbar dark expand="lg" className="myNav sticky-top">
+        <Link to="/" className="text-white text-decoration-none myNav-title">
           &lt;FrontChan /&gt;
         </Link>
         <NavbarToggler onClick={handleToggle} />
         <Collapse isOpen={isOpen} navbar>
-          <SearchInput isOpen={isOpen} />
           <Nav className="ml-auto d-felx justify-content-around" navbar>
             {isAuthenticated ? authLink : guestLink}
           </Nav>

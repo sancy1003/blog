@@ -61,11 +61,13 @@ const RegisterModal = () => {
 
   return (
     <div>
-      <NavLink onClick={handleToggle} href="#">
+      <NavLink onClick={handleToggle} href="#" className="myNav-menu register">
         Register
       </NavLink>
       <Modal isOpen={modal} toggle={handleToggle}>
-        <ModalHeader toggle={handleToggle}>Register</ModalHeader>
+        <ModalHeader toggle={handleToggle} className="myNav-modal-title">
+          Register
+        </ModalHeader>
         <ModalBody>
           {localMsg ? <Alert color="danger">{localMsg}</Alert> : null}
           <Form onSubmit={onSubmit}>
@@ -77,6 +79,7 @@ const RegisterModal = () => {
                 id="name"
                 placeholder="Name"
                 onChange={onChange}
+                className="myNav-modal-input"
               />
               <Label for="email">Email</Label>
               <Input
@@ -85,6 +88,7 @@ const RegisterModal = () => {
                 id="email"
                 placeholder="Email"
                 onChange={onChange}
+                className="myNav-modal-input"
               />
               <Label for="password">Password</Label>
               <Input
@@ -93,9 +97,10 @@ const RegisterModal = () => {
                 id="password"
                 placeholder="Password"
                 onChange={onChange}
+                className="myNav-modal-input last"
               />
-              <Button color="dark" className="mt-2" block>
-                Register
+              <Button className="mt-2 myNav-btn" block>
+                생성하기
               </Button>
             </FormGroup>
           </Form>

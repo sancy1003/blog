@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencilAlt,
   faCommentDots,
-  faMouse,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import Ballon from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import { editorConfiguration } from "../../components/editor/EditorConfig";
@@ -89,21 +89,23 @@ const PostDetail = (req) => {
 
   const Body = (
     <>
-      {userId === creatorId ? EditButton : HomeButton}
-      <Row className="border-bottom border-top border-primary p-3 mb-3 justify-content-between">
+      {userId === creatorId ? EditButton : ""}
+      <Row className="px-3 pb-3 mb-3 justify-content-between detail-container">
         {(() => {
           if (postDetail && postDetail.creator) {
             return (
               <Fragment>
                 <div className="font-weight-bold text-big">
                   <span className="mr-3">
-                    <Button color="info">
+                    <Button className="detail-category">
                       {postDetail.category.categoryName}
                     </Button>
                   </span>
-                  {postDetail.title}
+                  <span className="detail-title">{postDetail.title}</span>
                 </div>
-                <div className="align-self-end">{postDetail.creator.name}</div>
+                <div className="align-self-center detail-creator">
+                  {postDetail.creator.name}
+                </div>
               </Fragment>
             );
           }
@@ -111,16 +113,15 @@ const PostDetail = (req) => {
       </Row>
       {postDetail && postDetail.comments ? (
         <Fragment>
-          <div className="d-flex justify-content-end align-items-baseline small">
+          <div className="d-flex justify-content-end align-items-baseline detail-info">
             <FontAwesomeIcon icon={faPencilAlt} />
-            &nbsp;
-            <span>{postDetail.date}</span>
             &nbsp;&nbsp;
+            <span className="mr-3">{postDetail.date}</span>
             <FontAwesomeIcon icon={faCommentDots} />
-            &nbsp;
-            <span>{postDetail.comments.length}</span>
             &nbsp;&nbsp;
-            <FontAwesomeIcon icon={faMouse} />
+            <span className="mr-3">{postDetail.comments.length}</span>
+            <FontAwesomeIcon icon={faEye} />
+            &nbsp;&nbsp;
             <span>{postDetail.views}</span>
           </div>
           <Row className="mb-3">
@@ -132,16 +133,16 @@ const PostDetail = (req) => {
             />
           </Row>
           <Row>
-            <Container className="mb-3 border border-blue rounded">
+            <Container className="border rounded detail">
               {Array.isArray(comments)
                 ? comments.map(
                     ({ contents, creator, date, _id, creatorName }) => (
-                      <div key={_id}>
+                      <div key={_id} className="detail-comment-box">
                         <Row className="justify-content-between p-2">
                           <div className="font-weight-bold">
                             {creatorName ? creatorName : creator}
                           </div>
-                          <div className="text-small">
+                          <div className="text-small detail-comment-date">
                             <span className="font-weight-bold">
                               {date.split(" ")[0]}
                             </span>
@@ -151,7 +152,7 @@ const PostDetail = (req) => {
                             </span>
                           </div>
                         </Row>
-                        <Row className="p-2">
+                        <Row className="px-2 pt-1">
                           <div>{contents}</div>
                         </Row>
                       </div>

@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useRef } from "react";
-import { Form, Input } from "reactstrap";
+import React, { Fragment, useState } from "react";
+import { Form } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { SEARCH_REQUEST } from "../../redux/types";
 
@@ -25,14 +25,19 @@ const SearchInput = () => {
     });
 
     console.log(searchBy, "Submit Body");
-    resetValue.current.value = "";
+    document.querySelector(".myNav-searchbar").value = "";
   };
-  const resetValue = useRef(null);
+  //const resetValue = useRef(null);
 
   return (
     <Fragment>
-      <Form onSubmit={onSubmit} className="col">
-        <Input name="searchBy" onChange={onChange} innerRef={resetValue} />
+      <Form onSubmit={onSubmit} className="myNav-search-form">
+        <input
+          name="searchBy"
+          onChange={onChange}
+          className="myNav-searchbar"
+          placeholder="검색"
+        />
       </Form>
     </Fragment>
   );

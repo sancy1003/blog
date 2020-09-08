@@ -1,15 +1,7 @@
 import React, { Fragment } from "react";
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  Row,
-  Button,
-  Badge,
-} from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, Row, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import { faMouse } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faComment } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PostCardOne = ({ posts }) => {
@@ -23,20 +15,25 @@ const PostCardOne = ({ posts }) => {
                   to={`/post/${_id}`}
                   className="text-dark text-decoration-none"
                 >
-                  <Card className="mb-3">
+                  <Card className="mb-4">
                     <CardImg top alt="카드이미지" src={fileUrl} />
-                    <CardBody>
+                    <CardBody className="Mycardbody">
                       <CardTitle className="d-flex justify-content-between">
-                        <span className="text-truncate">{title}</span>
+                        <span className="text-truncate myCard-title">
+                          {title}
+                        </span>
                         <span>
-                          <FontAwesomeIcon icon={faMouse} />
+                          <FontAwesomeIcon icon={faEye} />
                           &nbsp;&nbsp;
-                          <span>{views}</span>
+                          <span style={{ marginRight: "15px" }}>{views}</span>
+                          <FontAwesomeIcon icon={faComment} />
+                          &nbsp;&nbsp;
+                          <span>{comments.length}</span>
                         </span>
                       </CardTitle>
                       <Row>
-                        <Button color="primary" className="p-2 btn-block">
-                          More <Badge color="light">{comments.length}</Badge>
+                        <Button className="p-2 btn-block btn-card-more">
+                          More
                         </Button>
                       </Row>
                     </CardBody>

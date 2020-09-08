@@ -1,3 +1,4 @@
+// 리액리 리덕스를 사용하여 store를 사용하기 위한 세팅, redux saga를 이용한 상태관리
 import { createStore, compose, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { createBrowserHistory } from "history";
@@ -8,9 +9,9 @@ import rootSaga from "./redux/sagas";
 
 export const history = createBrowserHistory();
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware(); // 사가 생성
 
-const initialState = {};
+const initialState = {}; // 초기 state 빈값 선언
 
 const middlewares = [sagaMiddleware, routerMiddleware(history)];
 const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;

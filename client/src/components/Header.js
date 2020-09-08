@@ -1,15 +1,12 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
 
 const Header = () => {
   return (
-    <div id="page-header" className="mb-3">
-      <Row>
-        <Col md="6" sm="auto" className="text-center m-auto">
-          <h1>Read Our Blog</h1>
-          <p>Frontchan's Blog</p>
-        </Col>
-      </Row>
+    <div id="page-header">
+      <div className="header-cover">
+        <p className="header-title">자료 정리 및 개인 포스팅 블로그입니다.</p>
+        <p className="header-text">Frontchan's Blog</p>
+      </div>
     </div>
   );
 };

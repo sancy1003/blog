@@ -23,7 +23,7 @@ const Search = () => {
 
   return (
     <div>
-      <h1>검색결과: "{searchTerm}"</h1>
+      <div className="serach-result-title">검색 결과 : "{searchTerm}"</div>
       <Row>
         <PostCardOne posts={searchResult} />
       </Row>

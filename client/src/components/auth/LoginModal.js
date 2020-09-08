@@ -57,11 +57,13 @@ const LoginModal = () => {
   };
   return (
     <div>
-      <NavLink onClick={handleToggle} href="#">
+      <NavLink onClick={handleToggle} href="#" className="myNav-menu">
         Login
       </NavLink>
       <Modal isOpen={modal} toggle={handleToggle}>
-        <ModalHeader toggle={handleToggle}>Login</ModalHeader>
+        <ModalHeader toggle={handleToggle} className="myNav-modal-title">
+          Login
+        </ModalHeader>
         <ModalBody>
           {localMsg ? <Alert color="danger">{localMsg}</Alert> : null}
           <Form onSubmit={onSubmit}>
@@ -73,6 +75,7 @@ const LoginModal = () => {
                 id="email"
                 placeholder="Email"
                 onChange={onChange}
+                className="myNav-modal-input"
               />
               <Label for="password">Password</Label>
               <Input
@@ -81,9 +84,10 @@ const LoginModal = () => {
                 id="password"
                 placeholder="Password"
                 onChange={onChange}
+                className="myNav-modal-input last"
               />
-              <Button color="dark" style={{ marginTop: "2rem" }} block>
-                Login
+              <Button className="mt-2 myNav-btn" block>
+                로그인
               </Button>
             </FormGroup>
           </Form>

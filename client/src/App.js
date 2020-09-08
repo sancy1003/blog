@@ -7,6 +7,7 @@ import MyRouter from "./routes/Router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/custom.scss";
 
+// store를 사용해 전체 state를 관리, connectedRouter를 사용해 history객체 사용
 const App = () => {
   return (
     <Provider store={store}>
