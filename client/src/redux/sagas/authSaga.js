@@ -1,4 +1,5 @@
 import axios from "axios";
+import { push } from "connected-react-router";
 import { call, put, takeEvery, all, fork } from "redux-saga/effects";
 import {
   LOGIN_FAILURE,
@@ -171,11 +172,12 @@ function* editPassword(action) {
       type: PASSWORD_EDIT_UPLOADING_SUCCESS,
       payload: result.data,
     });
+    yield put(push("/"));
   } catch (e) {
-    console.log(e);
+    console.log(e, "e");
     yield put({
       type: PASSWORD_EDIT_UPLOADING_FAILURE,
-      payload: e.response,
+      payload: e.response.data,
     });
   }
 }

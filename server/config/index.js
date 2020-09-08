@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
+import dotenv from "dotenv"; // .env사용을 위한 dotenv
+dotenv.config(); // dotenv 사용
 
 export default {
   MONGO_URI: process.env.MONGO_URI,

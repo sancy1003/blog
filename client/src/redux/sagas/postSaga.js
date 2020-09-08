@@ -29,13 +29,13 @@ import {
 } from "../types";
 
 // All Posts Load
-const loadPostAPI = () => {
-  return axios.get("/api/post");
+const loadPostAPI = (payload) => {
+  return axios.get(`/api/post/skip/${payload}`);
 };
 
-function* loadPosts() {
+function* loadPosts(action) {
   try {
-    const result = yield call(loadPostAPI);
+    const result = yield call(loadPostAPI, action.payload);
     console.log(result, "loadPosts");
     yield put({
       type: POSTS_LOADING_SUCCESS,

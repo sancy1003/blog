@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useCallback, useEffect } from "react";
 import {
   Navbar,
-  Container,
   NavbarToggler,
   Collapse,
   Nav,
@@ -46,7 +45,7 @@ const AppNavbar = () => {
     <Fragment>
       <NavItem>
         {userRole === "Admin" ? (
-          <Form className="col mt-2">
+          <Form className="col">
             <Link
               to="post"
               className="btn btn-success block text-white px-3"
@@ -60,7 +59,7 @@ const AppNavbar = () => {
         )}
       </NavItem>
       <NavItem className="d-flex justify-content-center">
-        <Form className="col mt-2">
+        <Form className="col">
           {user && user.name ? (
             <Link to={`/user/${user.name}/profile`}>
               <Button outline color="light" className="px-3" block>
@@ -77,7 +76,7 @@ const AppNavbar = () => {
       <NavItem>
         <Form className="col">
           <Link onClick={onLogout} to="#">
-            <Button outline color="light" className="mt-2" block>
+            <Button outline color="light" className="" block>
               Logout
             </Button>
           </Link>
@@ -100,18 +99,16 @@ const AppNavbar = () => {
   return (
     <Fragment>
       <Navbar color="dark" dark expand="lg" className="sticky-top">
-        <Container>
-          <Link to="/" className="text-white text-decoration-none">
-            Side Project's Blog
-          </Link>
-          <NavbarToggler onClick={handleToggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <SearchInput isOpen={isOpen} />
-            <Nav className="ml-auto d-felx justify-content-around" navbar>
-              {isAuthenticated ? authLink : guestLink}
-            </Nav>
-          </Collapse>
-        </Container>
+        <Link to="/" className="text-white text-decoration-none">
+          &lt;FrontChan /&gt;
+        </Link>
+        <NavbarToggler onClick={handleToggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <SearchInput isOpen={isOpen} />
+          <Nav className="ml-auto d-felx justify-content-around" navbar>
+            {isAuthenticated ? authLink : guestLink}
+          </Nav>
+        </Collapse>
       </Navbar>
     </Fragment>
   );

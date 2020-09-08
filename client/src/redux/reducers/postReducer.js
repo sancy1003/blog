@@ -41,7 +41,6 @@ export default function (state = initialState, action) {
     case POSTS_LOADING_REQUEST:
       return {
         ...state,
-        posts: [],
         loading: true,
       };
     case POSTS_LOADING_SUCCESS:
@@ -49,6 +48,7 @@ export default function (state = initialState, action) {
         ...state,
         posts: [...state.posts, ...action.payload.postFindResult],
         categoryFindResult: action.payload.categoryFindResult,
+        postCount: action.payload.postCount,
         loading: false,
       };
     case POSTS_LOADING_FAILURE:
