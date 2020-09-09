@@ -5,6 +5,7 @@ import morgan from "morgan"; // 로그(log)를 관리하기 위한 별도의 서
 import hpp from "hpp"; // 서버의 각종 취약점을 보완해주는 패키지들. 익스프레스 미들웨어로서 사용할 수 있음.
 import helmet from "helmet"; // 서버의 각종 취약점을 보완해주는 패키지들. 익스프레스 미들웨어로서 사용할 수 있음.
 import cors from "cors";
+import path from "path";
 
 // Routes
 import postRoutes from "./routes/api/post";
@@ -14,6 +15,7 @@ import searchRoutes from "./routes/api/search";
 
 const app = express(); // express 서버를 app으로 선언
 const { MONGO_URI } = config; // config에서 MONGO_URI의 값을 가져온다.
+const prod = process.env.NODE_ENV === "production";
 
 // 서버사용을 위한 세팅
 app.use(hpp());
@@ -40,5 +42,15 @@ app.use("/api/post", postRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/search", searchRoutes);
+
+// 위의 주소 외의 주소를 받으면
+// 아래 소스 실행, client의 index.html 을 보내줌
+
+if (prod) {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  });
+}
 
 export default app;

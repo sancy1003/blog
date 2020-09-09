@@ -5,6 +5,7 @@ import express from "express";
 import Post from "../../models/post";
 import Category from "../../models/category";
 import User from "../../models/user";
+import "@babel/polyfill"; // 문법 호환
 import Comment from "../../models/comment";
 import auth from "../../middleware/auth";
 

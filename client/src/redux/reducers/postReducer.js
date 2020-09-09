@@ -20,6 +20,7 @@ import {
   SEARCH_SUCCESS,
   SEARCH_FAILURE,
   SEARCH_REQUEST,
+  POSTS_NONE,
 } from "../types";
 
 const initialState = {
@@ -38,7 +39,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case POSTS_NONE:
+      return {
+        ...state,
+        posts: [],
+      };
     case POSTS_LOADING_REQUEST:
+      console.log(state, "오류");
       return {
         ...state,
         loading: true,

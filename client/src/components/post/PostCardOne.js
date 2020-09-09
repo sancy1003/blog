@@ -5,6 +5,7 @@ import { faEye, faComment } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PostCardOne = ({ posts }) => {
+  console.log(posts, "posts");
   return (
     <Fragment>
       {Array.isArray(posts)
